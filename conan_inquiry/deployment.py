@@ -21,7 +21,7 @@ def deploy():
             if retcode != 0:
                 raise ChildProcessError('Unable to run the command')
 
-        git('clone', os.getenv('GITHUB_REPO', 'git@github.com:02JanDal/conan_inquiry.git'),
+        git('clone', os.getenv('GITHUB_REPO', 'git@github.com:croydon/conan_inquiry.git'),
             '--branch', 'gh-pages',
             '--single-branch',
             cwd=dir)
