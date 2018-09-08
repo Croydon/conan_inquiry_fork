@@ -73,7 +73,9 @@ class Generator:
 
         github = get_github_client(3)
         # Used to calculate the resources used
-        rate_before = github.get_rate_limit().rate
+        # FIXME
+        # rate_before = github.get_rate_limit().rate
+        rate_before = 0
         try:
             with Cache(os.getenv('CACHE_FILE'), notimeout=development):
                 # Collect package files
@@ -113,7 +115,9 @@ class Generator:
 
                     print('All generation steps succeeded and package data written')
         finally:
-            rate = github.get_rate_limit().rate
+            # FIXME
+            # rate = github.get_rate_limit().rate
+            rate = 0
             print('Github rate limiting:\n\tRemaining: {}/{}\n\tUsed this call: {}\n\tResets: {}'.format(
                 rate.remaining, rate.limit, rate_before.remaining - rate.remaining,
                 (rate.reset + datetime.timedelta(hours=1)) - datetime.datetime.now()))

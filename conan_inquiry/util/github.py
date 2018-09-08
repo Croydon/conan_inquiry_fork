@@ -30,11 +30,12 @@ class CachingRequester(Requester):
     def requestJson(self, verb, url, parameters=None, headers=None, input=None, cnx=None):
         if Cache.current_cache is None:
             return super(CachingRequester, self).requestJson(verb, url, parameters, headers, input, cnx)
-        
+
         rawkey = verb + url + json.dumps(parameters or dict()) + str(headers or dict()) + (input or '') + (cnx or '')
         key = hashlib.md5(rawkey.encode('utf-8')).hexdigest()
 
         requester = self
+
         def getter():
             print(url)
             return super(CachingRequester, requester).requestJson(verb, url, parameters, headers, input, cnx)

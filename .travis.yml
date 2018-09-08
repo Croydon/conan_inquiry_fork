@@ -1,8 +1,13 @@
 dist: xenial
-sudo: false
+sudo: true
 
 language: python
-python: 3.7
+python: "3.7"
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change 
 
 install:
   - pip install -r requirements.txt
@@ -10,4 +15,4 @@ install:
 before_script:
   - python -m conan_inquiry find
   - python -m conan_inquiry generate
-  - python -m conan_inquiry deploy 
+  - if [["$TRAVIS_BRANCH" == "master"]]; then python -m conan_inquiry deploy; fi
